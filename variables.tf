@@ -38,6 +38,12 @@ variable "architectures" {
   default     = ["x86_64"]
 }
 
+variable "environment_variables" {
+  description = "Environment variables to set on the Lambda function."
+  type        = map(string)
+  default     = {}
+}
+
 variable "code_managed_elsewhere" {
   description = "If true, module deploys a built-in hello-world package so infra can be managed without providing code artifacts."
   type        = bool
