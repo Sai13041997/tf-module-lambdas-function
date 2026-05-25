@@ -177,6 +177,13 @@ resource "aws_lambda_function" "placeholder" {
     }
   }
 
+  dynamic "environment" {
+    for_each = length(var.environment_variables) > 0 ? [1] : []
+    content {
+      variables = var.environment_variables
+    }
+  }
+
   tags = var.tags
 
   # Key change: once created, Terraform will stop trying to update code-related fields
@@ -231,6 +238,13 @@ resource "aws_lambda_function" "from_source_file" {
     }
   }
 
+  dynamic "environment" {
+    for_each = length(var.environment_variables) > 0 ? [1] : []
+    content {
+      variables = var.environment_variables
+    }
+  }
+
   tags = var.tags
 
   lifecycle {
@@ -272,6 +286,13 @@ resource "aws_lambda_function" "from_filename" {
         ? var.security_group_ids
         : [aws_security_group.this[0].id]
       )
+    }
+  }
+
+  dynamic "environment" {
+    for_each = length(var.environment_variables) > 0 ? [1] : []
+    content {
+      variables = var.environment_variables
     }
   }
 
